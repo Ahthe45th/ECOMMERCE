@@ -10,3 +10,20 @@ npm run dev
 ```
 
 Set `MONGODB_URI` in `.env` to connect to MongoDB.
+
+## Production
+
+Install dependencies and create an optimized build:
+
+```bash
+npm install
+npm run build
+```
+
+`next build` compiles the application and generates Tailwind CSS styles.
+
+Start the production server with:
+
+```bash
+npm start
+```
