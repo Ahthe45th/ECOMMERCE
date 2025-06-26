@@ -39,27 +39,41 @@ export default function Admin() {
   };
 
   return (
-    <div className="p-4 space-y-4">
-      <div className="grid grid-cols-2 gap-2">
-        <input className="border p-1" name="name" placeholder="Name" onChange={handleChange} />
-        <input className="border p-1" name="description" placeholder="Description" onChange={handleChange} />
-        <input className="border p-1" name="price" placeholder="Price" type="number" onChange={handleChange} />
-        <input className="border p-1" name="imageUrl" placeholder="Image URL" onChange={handleChange} />
-        <input className="border p-1" name="size" placeholder="Size" onChange={handleChange} />
-        <input className="border p-1" name="gender" placeholder="Gender" onChange={handleChange} />
-        <input className="border p-1" name="category" placeholder="Category" onChange={handleChange} />
-        <input className="border p-1" name="color" placeholder="Color" onChange={handleChange} />
-      </div>
-      <button className="bg-blue-500 text-white px-3 py-1" onClick={submit}>Add</button>
+    <div className="max-w-3xl mx-auto p-4 space-y-6">
+      <h1 className="text-2xl font-bold">Admin Panel</h1>
 
-      <ul>
-        {products.map(p => (
-          <li key={p._id} className="flex justify-between border p-2 my-1">
-            <span>{p.name}</span>
-            <button className="text-red-500" onClick={() => del(p._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <div className="bg-white rounded shadow p-4 space-y-4">
+        <div className="grid md:grid-cols-2 gap-4">
+          <input className="border rounded p-2 w-full" name="name" placeholder="Name" onChange={handleChange} />
+          <input className="border rounded p-2 w-full" name="description" placeholder="Description" onChange={handleChange} />
+          <input className="border rounded p-2 w-full" name="price" placeholder="Price" type="number" onChange={handleChange} />
+          <input className="border rounded p-2 w-full" name="imageUrl" placeholder="Image URL" onChange={handleChange} />
+          <input className="border rounded p-2 w-full" name="size" placeholder="Size" onChange={handleChange} />
+          <input className="border rounded p-2 w-full" name="gender" placeholder="Gender" onChange={handleChange} />
+          <input className="border rounded p-2 w-full" name="category" placeholder="Category" onChange={handleChange} />
+          <input className="border rounded p-2 w-full" name="color" placeholder="Color" onChange={handleChange} />
+        </div>
+        <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded" onClick={submit}>Add Product</button>
+      </div>
+
+      <table className="min-w-full text-sm border divide-y divide-gray-200">
+        <thead className="bg-gray-50">
+          <tr>
+            <th className="px-4 py-2 text-left">Name</th>
+            <th className="px-4 py-2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map(p => (
+            <tr key={p._id} className="border-t">
+              <td className="px-4 py-2">{p.name}</td>
+              <td className="px-4 py-2 text-right">
+                <button className="text-red-600 hover:underline" onClick={() => del(p._id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
