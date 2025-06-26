@@ -9,6 +9,8 @@ const ProductSchema = new mongoose.Schema({
   gender: String,
   category: String,
   color: String,
+  type: { type: String, enum: ['digital', 'physical', 'service'], default: 'physical' },
+  inventory: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now }
 });
 
@@ -17,6 +19,7 @@ const OrderSchema = new mongoose.Schema({
   phone: String,
   address: String,
   items: Array,
+  status: { type: String, enum: ['pending', 'paid', 'shipped', 'completed'], default: 'pending' },
   createdAt: { type: Date, default: Date.now }
 });
 

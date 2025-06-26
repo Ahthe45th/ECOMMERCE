@@ -1,5 +1,9 @@
 import { useState } from 'react';
+<<<<<<< codex/extend-ecommerce-platform-functionality
+import { createOrder } from '../lib/api';
+=======
 import { Product, Order } from '../types';
+>>>>>>> main
 
 export default function Checkout() {
   const [form, setForm] = useState<Omit<Order, '_id' | 'createdAt'>>({
@@ -14,11 +18,15 @@ export default function Checkout() {
   };
 
   const submit = async () => {
+<<<<<<< codex/extend-ecommerce-platform-functionality
+    await createOrder({ ...form, items: [] });
+=======
     await fetch('/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form)
     });
+>>>>>>> main
     alert('Order received! We will contact you shortly.');
   };
 

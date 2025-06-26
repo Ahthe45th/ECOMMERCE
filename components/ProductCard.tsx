@@ -12,6 +12,7 @@ export default function ProductCard({ product }: Props) {
       <h3 className="font-semibold mt-2">{product.name}</h3>
       <p className="text-sm text-gray-500">{product.description}</p>
       <p className="font-bold">KES {product.price}</p>
+      <p className="text-xs text-gray-600">{product.type}</p>
     </div>
   );
 }
