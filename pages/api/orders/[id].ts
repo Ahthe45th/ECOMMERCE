@@ -4,11 +4,12 @@ import { connect } from '../../../lib/db';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connect();
-  if (req.method === 'GET') {
-    const orders = await (Order as any).find().lean();
-    res.json(orders);
-  } else if (req.method === 'POST') {
-    const order = await (Order as any).create(req.body);
+  const id = req.query.id as string;
+  if (req.method === 'PUT') {
+    const updated = await (Order as any).findByIdAndUpdate(id, req.body, { new: true });
+    res.json(updated);
+  } else if (req.method === 'GET') {
+    const order = await (Order as any).findById(id).lean();
     res.json(order);
   } else {
     res.status(405).end();

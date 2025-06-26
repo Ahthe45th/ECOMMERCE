@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Product } from '../types';
+import { createOrder } from '../lib/api';
 
 export default function Checkout() {
   const [form, setForm] = useState({ name: '', phone: '', address: '' });
@@ -9,11 +9,7 @@ export default function Checkout() {
   };
 
   const submit = async () => {
-    await fetch('/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...form, items: [] })
-    });
+    await createOrder({ ...form, items: [] });
     alert('Order received! We will contact you shortly.');
   };
 
