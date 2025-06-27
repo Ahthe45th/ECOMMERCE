@@ -16,5 +16,6 @@ export interface Order {
   phone: string;
   address: string;
   items: Product[];
+  paymentOption?: 'ondelivery' | 'paynow';
   createdAt?: string;
 }

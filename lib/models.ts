@@ -17,6 +17,7 @@ const OrderSchema = new mongoose.Schema({
   phone: String,
   address: String,
   items: Array,
+  paymentOption: String,
   createdAt: { type: Date, default: Date.now }
 });
 

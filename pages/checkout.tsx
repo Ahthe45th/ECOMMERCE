@@ -10,6 +10,8 @@ export default function Checkout() {
     address: '',
     items: []
   });
+  const [paymentOption, setPaymentOption] = useState<'ondelivery' | 'paynow'>('ondelivery');
+  const [paymentLink, setPaymentLink] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,15 +20,18 @@ export default function Checkout() {
   const submit = async () => {
     const order: Omit<Order, '_id' | 'createdAt'> = {
       ...form,
-      items
+      items,
+      paymentOption
     };
-    await fetch('/api/orders', {
+    const res = await fetch('/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(order)
     });
+    const saved = await res.json();
     clear();
-    alert('Order received! We will contact you shortly.');
+    setPaymentLink(`https://pay.example.com/${saved._id}`);
+    alert('Order received! Use the link below to pay when ready.');
   };
 
   return (
@@ -45,8 +50,38 @@ export default function Checkout() {
       <input className="border p-1 w-full" name="customerName" placeholder="Name" onChange={handleChange} />
       <input className="border p-1 w-full" name="phone" placeholder="Phone" onChange={handleChange} />
       <input className="border p-1 w-full" name="address" placeholder="Address" onChange={handleChange} />
+      <div className="space-x-4">
+        <label>
+          <input
+            type="radio"
+            value="ondelivery"
+            name="payment"
+            checked={paymentOption === 'ondelivery'}
+            onChange={() => setPaymentOption('ondelivery')}
+          />{' '}
+          Pay on Delivery
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="paynow"
+            name="payment"
+            checked={paymentOption === 'paynow'}
+            onChange={() => setPaymentOption('paynow')}
+          />{' '}
+          Pay Now
+        </label>
+      </div>
       <p>M-Pesa instructions will be sent to your phone.</p>
       <button className="bg-green-500 text-white px-3 py-1" onClick={submit}>Submit</button>
+      {paymentLink && (
+        <p className="mt-2">
+          Payment link: {' '}
+          <a href={paymentLink} className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
+            {paymentLink}
+          </a>
+        </p>
+      )}
     </div>
   );
 }
