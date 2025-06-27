@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import ProductCard from '../../components/ProductCard';
+import Spinner from '../../components/Spinner';
 import { Product } from '../../types';
 import { useCart } from '../../lib/cart';
 
@@ -18,7 +19,7 @@ export default function ProductPage() {
   const { data: products } = useSWR<Product[]>('/api/products', fetcher);
 
   if (error) return <div>Failed to load</div>;
-  if (!product) return <div>Loading...</div>;
+  if (!product) return <Spinner />;
 
   const others = products?.filter(p => p._id !== id) || [];
 
