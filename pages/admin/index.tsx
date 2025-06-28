@@ -50,6 +50,9 @@ export default function Admin() {
         <Link href="/admin/confirmations" className="underline text-blue-600">
           View Confirmations
         </Link>
+        <Link href="/admin/utils/submit-mpesa" className="underline text-blue-600">
+          Add M-Pesa Message
+        </Link>
       </div>
 
       <div className="bg-white rounded shadow p-4 space-y-4">
