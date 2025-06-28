@@ -12,10 +12,19 @@ export interface Product {
 }
 
 export interface Order {
+  _id?: string;
   customerName: string;
   phone: string;
   address: string;
   items: Product[];
   paymentOption?: 'ondelivery' | 'paynow';
+  createdAt?: string;
+}
+
+export interface Confirmation {
+  _id?: string;
+  orderId: string;
+  phone: string;
+  message: string;
   createdAt?: string;
 }
