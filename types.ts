@@ -26,5 +26,6 @@ export interface Confirmation {
   orderId: string;
   phone: string;
   message: string;
+  status?: 'approved' | 'pending';
   createdAt?: string;
 }

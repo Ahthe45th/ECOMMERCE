@@ -22,7 +22,11 @@ export default function OrdersPage() {
         <tbody>
           {orders.map(o => (
             <tr key={o._id} className="border-t">
-              <td className="px-2 py-1">{o.customerName}</td>
+              <td className="px-2 py-1">
+                <a href={`/admin/orders/${o._id}`} className="text-blue-600 underline">
+                  {o.customerName}
+                </a>
+              </td>
               <td className="px-2 py-1">{o.phone}</td>
               <td className="px-2 py-1">{o.items.length}</td>
             </tr>

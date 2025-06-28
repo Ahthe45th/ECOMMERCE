@@ -25,6 +25,7 @@ const ConfirmationSchema = new mongoose.Schema({
   orderId: mongoose.Schema.Types.ObjectId,
   phone: String,
   message: String,
+  status: { type: String, enum: ['approved', 'pending'], default: 'pending' },
   createdAt: { type: Date, default: Date.now }
 });
 
