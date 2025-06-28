@@ -21,5 +21,14 @@ const OrderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
+const ConfirmationSchema = new mongoose.Schema({
+  orderId: mongoose.Schema.Types.ObjectId,
+  phone: String,
+  message: String,
+  createdAt: { type: Date, default: Date.now }
+});
+
 export const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);
 export const Order = mongoose.models.Order || mongoose.model('Order', OrderSchema);
+export const Confirmation =
+  mongoose.models.Confirmation || mongoose.model('Confirmation', ConfirmationSchema);

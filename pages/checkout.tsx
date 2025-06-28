@@ -31,7 +31,7 @@ export default function Checkout() {
     });
     const saved = await res.json();
     clear();
-    setPaymentLink(`https://pay.example.com/${saved._id}`);
+    setPaymentLink(`/pay/${saved._id}`);
     alert('Order received! Use the link below to pay when ready.');
   };
 
@@ -40,8 +40,9 @@ export default function Checkout() {
       <h2 className="text-lg font-semibold">Cart Items</h2>
       {items.length === 0 && <p>Your cart is empty.</p>}
       {items.map((item) => (
-        <div key={item._id} className="flex justify-between items-center border-b py-1">
-          <span>{item.name}</span>
+        <div key={item._id} className="flex items-center justify-between border-b py-1 gap-2">
+          <img src={item.imageUrl} alt={item.name} className="w-10 h-10 object-cover" />
+          <span className="flex-1">{item.name}</span>
           <button className="text-red-600 inline-flex items-center" onClick={() => removeItem(item._id)}>
             <TrashIcon className="w-5 h-5" />
           </button>
@@ -78,12 +79,22 @@ export default function Checkout() {
         Submit <ArrowRightCircleIcon className="w-5 h-5" />
       </button>
       {paymentLink && (
-        <p className="mt-2">
-          Payment link: {' '}
-          <a href={paymentLink} className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
-            {paymentLink}
+        <div className="mt-2 space-x-2">
+          <a
+            href={paymentLink}
+            className="bg-blue-600 text-white px-3 py-1 rounded inline-block"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Go to Payment
           </a>
-        </p>
+          <button
+            className="bg-gray-200 px-3 py-1 rounded"
+            onClick={() => paymentLink && navigator.clipboard.writeText(paymentLink)}
+          >
+            Copy Link
+          </button>
+        </div>
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { TrashIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
 import { Product } from '../../types';
 
@@ -42,6 +43,14 @@ export default function Admin() {
   return (
     <div className="max-w-3xl mx-auto p-4 space-y-6">
       <h1 className="text-2xl font-bold">Admin Panel</h1>
+      <div className="space-x-4">
+        <Link href="/admin/orders" className="underline text-blue-600">
+          View Orders
+        </Link>
+        <Link href="/admin/confirmations" className="underline text-blue-600">
+          View Confirmations
+        </Link>
+      </div>
 
       <div className="bg-white rounded shadow p-4 space-y-4">
         <div className="grid md:grid-cols-2 gap-4">
