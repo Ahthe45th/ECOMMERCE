@@ -26,6 +26,7 @@ export interface Confirmation {
   orderId: string;
   phone: string;
   message: string;
+  source?: 'user' | 'mpesa';
   status?: 'approved' | 'pending';
   createdAt?: string;
 }

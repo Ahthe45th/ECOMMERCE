@@ -17,6 +17,7 @@ export default function ConfirmationsPage() {
             <th className="px-2 py-1 text-left">Order ID</th>
             <th className="px-2 py-1 text-left">Phone</th>
             <th className="px-2 py-1 text-left">Message</th>
+            <th className="px-2 py-1 text-left">Source</th>
             <th className="px-2 py-1 text-left">Status</th>
           </tr>
         </thead>
@@ -26,6 +27,7 @@ export default function ConfirmationsPage() {
               <td className="px-2 py-1">{c.orderId}</td>
               <td className="px-2 py-1">{c.phone}</td>
               <td className="px-2 py-1">{c.message}</td>
+              <td className="px-2 py-1">{c.source}</td>
               <td className="px-2 py-1">{c.status}</td>
             </tr>
           ))}
