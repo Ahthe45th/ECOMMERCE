@@ -13,7 +13,7 @@ export default function PayPage() {
     await fetch('/api/confirmations', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ orderId: id, phone, message })
+      body: JSON.stringify({ orderId: id, phone, message, status: 'pending' })
     });
     setSent(true);
   };
