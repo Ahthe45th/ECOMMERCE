@@ -1,3 +1,5 @@
+import { FaWhatsapp } from 'react-icons/fa';
+
 export default function WhatsAppButton() {
   return (
     <a
@@ -6,7 +8,7 @@ export default function WhatsAppButton() {
       rel="noopener noreferrer"
       className="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center transition"
     >
-      💬
+      <FaWhatsapp className="w-6 h-6" />
     </a>
   );
 }

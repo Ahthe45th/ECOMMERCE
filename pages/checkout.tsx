@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TrashIcon, ArrowRightCircleIcon } from '@heroicons/react/24/outline';
 import { Product, Order } from '../types';
 import { useCart } from '../lib/cart';
 
@@ -39,10 +40,10 @@ export default function Checkout() {
       <h2 className="text-lg font-semibold">Cart Items</h2>
       {items.length === 0 && <p>Your cart is empty.</p>}
       {items.map((item) => (
-        <div key={item._id} className="flex justify-between border-b py-1">
+        <div key={item._id} className="flex justify-between items-center border-b py-1">
           <span>{item.name}</span>
-          <button className="text-red-600" onClick={() => removeItem(item._id)}>
-            remove
+          <button className="text-red-600 inline-flex items-center" onClick={() => removeItem(item._id)}>
+            <TrashIcon className="w-5 h-5" />
           </button>
         </div>
       ))}
@@ -73,7 +74,9 @@ export default function Checkout() {
         </label>
       </div>
       <p>M-Pesa instructions will be sent to your phone.</p>
-      <button className="bg-green-500 text-white px-3 py-1" onClick={submit}>Submit</button>
+      <button className="bg-green-500 text-white px-3 py-1 inline-flex items-center gap-1" onClick={submit}>
+        Submit <ArrowRightCircleIcon className="w-5 h-5" />
+      </button>
       {paymentLink && (
         <p className="mt-2">
           Payment link: {' '}

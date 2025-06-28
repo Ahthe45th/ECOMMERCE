@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import ProductCard from '../components/ProductCard';
 import Spinner from '../components/Spinner';
+import { ArrowDownCircleIcon } from '@heroicons/react/24/outline';
 import { Product } from '../types';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
@@ -20,9 +21,9 @@ export default function Home() {
           <p>Affordable styles for everyone</p>
           <a
             href="#products"
-            className="inline-block bg-green-600 px-4 py-2 rounded text-white"
+            className="inline-flex items-center gap-1 bg-green-600 px-4 py-2 rounded text-white"
           >
-            See Products
+            See Products <ArrowDownCircleIcon className="w-5 h-5" />
           </a>
         </div>
       </section>
