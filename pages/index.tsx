@@ -12,9 +12,9 @@ export default function Home() {
   const hero = (
     <section className="relative h-64 flex items-center justify-center text-white mb-4">
         <img
-          src="https://source.unsplash.com/random/900x600?clothes"
+          src="https://images.unsplash.com/photo-1540221652346-e5dd6b50f3e7?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Store"
-          className="absolute inset-0 w-full h-full object-cover opacity-70"
+          className="absolute inset-0 w-full h-full object-cover brightness-50"
         />
         <div className="relative text-center space-y-2">
           <h1 className="text-2xl font-bold">Quality Second-hand Clothing</h1>
