@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { Product } from '../types';
 import { useCart } from '../lib/cart';
 
@@ -22,10 +23,10 @@ export default function ProductCard({ product }: Props) {
         <p className="font-bold">KES {product.price}</p>
       </Link>
       <button
-        className="bg-green-500 hover:bg-green-600 text-white w-full py-2 font-semibold"
+        className="bg-green-500 hover:bg-green-600 text-white w-full py-2 font-semibold flex items-center justify-center gap-1"
         onClick={() => addItem(product)}
       >
-        Add to Cart
+        <ShoppingCartIcon className="w-5 h-5" /> Add to Cart
       </button>
     </div>
   );

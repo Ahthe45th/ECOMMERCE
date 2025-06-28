@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import ProductCard from '../../components/ProductCard';
 import Spinner from '../../components/Spinner';
+import { ShoppingCartIcon, ArrowRightCircleIcon } from '@heroicons/react/24/outline';
 import { Product } from '../../types';
 import { useCart } from '../../lib/cart';
 
@@ -36,11 +37,11 @@ export default function ProductPage() {
         <p>{product.description}</p>
         <p className="font-bold">KES {product.price}</p>
         <div className="space-x-2">
-          <button className="bg-green-500 text-white px-3 py-1" onClick={() => addItem(product)}>
-            Add to Cart
+          <button className="bg-green-500 text-white px-3 py-1 inline-flex items-center gap-1" onClick={() => addItem(product)}>
+            <ShoppingCartIcon className="w-5 h-5" /> Add to Cart
           </button>
-          <button className="bg-blue-600 text-white px-3 py-1" onClick={checkoutNow}>
-            Checkout
+          <button className="bg-blue-600 text-white px-3 py-1 inline-flex items-center gap-1" onClick={checkoutNow}>
+            <ArrowRightCircleIcon className="w-5 h-5" /> Checkout
           </button>
         </div>
       </div>
