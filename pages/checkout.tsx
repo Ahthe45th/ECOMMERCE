@@ -8,6 +8,7 @@ export default function Checkout() {
   const [form, setForm] = useState<Omit<Order, '_id' | 'createdAt'>>({
     customerName: '',
     phone: '',
+    email: '',
     address: '',
     items: []
   });
@@ -51,6 +52,7 @@ export default function Checkout() {
 
       <input className="border p-1 w-full" name="customerName" placeholder="Name" onChange={handleChange} />
       <input className="border p-1 w-full" name="phone" placeholder="Phone" onChange={handleChange} />
+      <input className="border p-1 w-full" name="email" placeholder="Email" onChange={handleChange} />
       <input className="border p-1 w-full" name="address" placeholder="Address" onChange={handleChange} />
       <div className="space-x-4">
         <label>

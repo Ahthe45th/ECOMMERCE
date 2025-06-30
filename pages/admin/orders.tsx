@@ -16,6 +16,7 @@ export default function OrdersPage() {
           <tr>
             <th className="px-2 py-1 text-left">Customer</th>
             <th className="px-2 py-1 text-left">Phone</th>
+            <th className="px-2 py-1 text-left">Email</th>
             <th className="px-2 py-1 text-left">Items</th>
           </tr>
         </thead>
@@ -28,6 +29,7 @@ export default function OrdersPage() {
                 </a>
               </td>
               <td className="px-2 py-1">{o.phone}</td>
+              <td className="px-2 py-1">{o.email}</td>
               <td className="px-2 py-1">{o.items.length}</td>
             </tr>
           ))}

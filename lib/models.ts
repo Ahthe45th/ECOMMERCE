@@ -15,6 +15,7 @@ const ProductSchema = new mongoose.Schema({
 const OrderSchema = new mongoose.Schema({
   customerName: String,
   phone: String,
+  email: String,
   address: String,
   items: Array,
   paymentOption: String,

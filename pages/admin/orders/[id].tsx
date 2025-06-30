@@ -37,6 +37,9 @@ export default function OrderDetailsPage() {
         <strong>Phone:</strong> {order.phone}
       </p>
       <p>
+        <strong>Email:</strong> {order.email}
+      </p>
+      <p>
         <strong>Address:</strong> {order.address}
       </p>
       <p>
