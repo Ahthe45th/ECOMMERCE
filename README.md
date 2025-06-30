@@ -9,7 +9,8 @@ npm install
 npm run dev
 ```
 
-Set `MONGODB_URI` in `.env` to connect to MongoDB.
+Set `MONGODB_URI` in `.env` to connect to MongoDB. To enable email notifications,
+also provide `MAILJET_API_KEY`, `MAILJET_SECRET_KEY` and `MAILJET_FROM`.
 
 ## Production
 

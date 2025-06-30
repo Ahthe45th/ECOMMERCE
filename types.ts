@@ -15,6 +15,7 @@ export interface Order {
   _id?: string;
   customerName: string;
   phone: string;
+  email: string;
   address: string;
   items: Product[];
   paymentOption?: 'ondelivery' | 'paynow';
