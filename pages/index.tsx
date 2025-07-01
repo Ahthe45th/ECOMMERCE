@@ -16,9 +16,11 @@ export default function Home() {
         alt="Store"
         className="absolute inset-0 w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-black/50" />
-      <div className="relative text-center space-y-3">
-        <h1 className="text-2xl font-bold">Quality Second-hand Clothing</h1>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40" />
+      <div className="relative text-center space-y-3 px-4">
+        <h1 className="text-3xl sm:text-4xl font-bold drop-shadow">
+          Quality Second-hand Clothing
+        </h1>
         <p>Affordable styles for everyone</p>
         <a
           href="#products"
