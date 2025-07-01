@@ -46,8 +46,8 @@ export default function OrderDetailsPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-4 space-y-2">
-      <h1 className="text-2xl font-bold mb-2">Order Details</h1>
+    <div className="max-w-3xl mx-auto p-6 space-y-4 bg-white shadow rounded">
+      <h1 className="text-2xl font-bold">Order Details</h1>
       <p>
         <strong>Customer:</strong> {order.customerName}
       </p>
@@ -80,13 +80,19 @@ export default function OrderDetailsPage() {
         </select>
       </p>
       <h2 className="text-xl font-semibold mt-4">Items</h2>
-      <ul className="list-disc ml-4">
+      <div className="border divide-y">
         {order.items.map((item, idx) => (
-          <li key={idx}>
-            {item.name} - KES {item.price}
-          </li>
+          <div key={idx} className="flex items-center gap-2 p-2">
+            <img
+              src={item.imageUrl}
+              alt={item.name}
+              className="w-12 h-12 object-cover rounded"
+            />
+            <span className="flex-1">{item.name}</span>
+            <span>KES {item.price}</span>
+          </div>
         ))}
-      </ul>
+      </div>
       {confirmation ? (
         <div className="mt-4 space-y-2">
           <p>
