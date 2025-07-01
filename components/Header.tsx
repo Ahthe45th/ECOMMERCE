@@ -28,6 +28,12 @@ export default function Header() {
             <ShoppingCartIcon className="w-5 h-5" /> Cart ({items.length})
           </Link>
           <Link
+            href="/account/orders"
+            className="hover:underline inline-flex items-center gap-1"
+          >
+            Account
+          </Link>
+          <Link
             href="/admin"
             className="hover:underline inline-flex items-center gap-1"
           >
