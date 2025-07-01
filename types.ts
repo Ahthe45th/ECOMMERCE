@@ -19,6 +19,8 @@ export interface Order {
   address: string;
   items: Product[];
   paymentOption?: "ondelivery" | "paynow";
+  status?: "pending" | "processed" | "shipped" | "delivered" | "cancelled";
+  userId?: string;
   createdAt?: string;
 }
 
@@ -35,5 +37,12 @@ export interface Confirmation {
 export interface AdminUser {
   _id?: string;
   username: string;
+  passwordHash?: string;
+}
+
+export interface Customer {
+  _id?: string;
+  email: string;
+  name: string;
   passwordHash?: string;
 }
