@@ -36,6 +36,15 @@ export default function OrderDetailsPage() {
     mutate();
   };
 
+  const updateOrderStatus = async (status: string) => {
+    await fetch(`/api/orders/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    });
+    mutate();
+  };
+
   return (
     <div className="max-w-3xl mx-auto p-4 space-y-2">
       <h1 className="text-2xl font-bold mb-2">Order Details</h1>
@@ -53,6 +62,22 @@ export default function OrderDetailsPage() {
       </p>
       <p>
         <strong>Payment Option:</strong> {order.paymentOption}
+      </p>
+      <p>
+        <strong>Order Status:</strong>{" "}
+        <select
+          value={order.status}
+          onChange={(e) => updateOrderStatus(e.target.value)}
+          className="border p-1 rounded"
+        >
+          {["pending", "processed", "shipped", "delivered", "cancelled"].map(
+            (s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ),
+          )}
+        </select>
       </p>
       <h2 className="text-xl font-semibold mt-4">Items</h2>
       <ul className="list-disc ml-4">

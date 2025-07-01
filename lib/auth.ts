@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { AdminUser } from "./models";
+import { AdminUser, Customer } from "./models";
 import { connect } from "./db";
 
 const SECRET = process.env.JWT_SECRET || "secret";
@@ -21,6 +21,24 @@ export async function verifyAdmin(req: { headers: { cookie?: string } }) {
     await connect();
     const admin = await (AdminUser as any).findById(decoded.id).lean();
     return admin;
+  } catch {
+    return null;
+  }
+}
+
+export async function verifyUser(req: { headers: { cookie?: string } }) {
+  const cookieHeader = req.headers.cookie || "";
+  const token = cookieHeader
+    .split(";")
+    .map((c) => c.trim())
+    .find((c) => c.startsWith("user-token="))
+    ?.split("=")[1];
+  if (!token) return null;
+  try {
+    const decoded = jwt.verify(token, SECRET) as any;
+    await connect();
+    const user = await (Customer as any).findById(decoded.id).lean();
+    return user;
   } catch {
     return null;
   }

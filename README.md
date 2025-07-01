@@ -2,6 +2,11 @@
 
 This is a minimal Next.js + MongoDB eCommerce demo for a Kenyan second-hand clothing store.
 
+## New Features
+
+- Customers can sign up and log in to view their orders.
+- Orders now have a workflow status (pending, processed, shipped, delivered, cancelled) editable in the admin panel.
+
 ## Development
 
 ```bash

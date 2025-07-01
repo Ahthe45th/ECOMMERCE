@@ -19,6 +19,12 @@ const OrderSchema = new mongoose.Schema({
   address: String,
   items: Array,
   paymentOption: String,
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "Customer" },
+  status: {
+    type: String,
+    enum: ["pending", "processed", "shipped", "delivered", "cancelled"],
+    default: "pending",
+  },
   createdAt: { type: Date, default: Date.now },
 });
 
@@ -46,3 +52,12 @@ const AdminUserSchema = new mongoose.Schema({
 
 export const AdminUser =
   mongoose.models.AdminUser || mongoose.model("AdminUser", AdminUserSchema);
+
+const CustomerSchema = new mongoose.Schema({
+  email: { type: String, unique: true },
+  passwordHash: String,
+  name: String,
+});
+
+export const Customer =
+  mongoose.models.Customer || mongoose.model("Customer", CustomerSchema);
