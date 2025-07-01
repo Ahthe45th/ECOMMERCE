@@ -33,8 +33,8 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="p-4 space-y-4">
-      <div className="border p-4 space-y-2">
+    <div className="max-w-3xl mx-auto p-4 space-y-4">
+      <div className="bg-white border rounded shadow p-4 space-y-3">
         <img
           src={product.imageUrl}
           alt={product.name}
@@ -45,13 +45,13 @@ export default function ProductPage() {
         <p className="font-bold">KES {product.price}</p>
         <div className="space-x-2">
           <button
-            className="bg-green-500 text-white px-3 py-1 inline-flex items-center gap-1"
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded inline-flex items-center gap-1"
             onClick={() => addItem(product)}
           >
             <ShoppingCartIcon className="w-5 h-5" /> Add to Cart
           </button>
           <button
-            className="bg-blue-600 text-white px-3 py-1 inline-flex items-center gap-1"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded inline-flex items-center gap-1"
             onClick={checkoutNow}
           >
             <ArrowRightCircleIcon className="w-5 h-5" /> Checkout
@@ -61,7 +61,7 @@ export default function ProductPage() {
 
       <div>
         <h3 className="text-lg font-semibold mb-2">Other Products</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {others.map((p) => (
             <ProductCard key={p._id} product={p} />
           ))}

@@ -39,7 +39,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className="p-4 space-y-2">
+    <div className="max-w-md mx-auto p-4 space-y-3">
       <h2 className="text-lg font-semibold">Cart Items</h2>
       {items.length === 0 && <p>Your cart is empty.</p>}
       {items.map((item) => (
@@ -63,25 +63,25 @@ export default function Checkout() {
       ))}
 
       <input
-        className="border p-1 w-full"
+        className="border rounded p-2 w-full"
         name="customerName"
         placeholder="Name"
         onChange={handleChange}
       />
       <input
-        className="border p-1 w-full"
+        className="border rounded p-2 w-full"
         name="phone"
         placeholder="Phone"
         onChange={handleChange}
       />
       <input
-        className="border p-1 w-full"
+        className="border rounded p-2 w-full"
         name="email"
         placeholder="Email"
         onChange={handleChange}
       />
       <input
-        className="border p-1 w-full"
+        className="border rounded p-2 w-full"
         name="address"
         placeholder="Address"
         onChange={handleChange}
@@ -110,7 +110,7 @@ export default function Checkout() {
       </div>
       <p>M-Pesa instructions will be sent to your phone.</p>
       <button
-        className="bg-green-500 text-white px-3 py-1 inline-flex items-center gap-1"
+        className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded inline-flex items-center gap-1"
         onClick={submit}
       >
         Submit <ArrowRightCircleIcon className="w-5 h-5" />
@@ -119,14 +119,14 @@ export default function Checkout() {
         <div className="mt-2 space-x-2">
           <a
             href={paymentLink}
-            className="bg-blue-600 text-white px-3 py-1 rounded inline-block"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded inline-block"
             target="_blank"
             rel="noopener noreferrer"
           >
             Go to Payment
           </a>
           <button
-            className="bg-gray-200 px-3 py-1 rounded"
+            className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
             onClick={() =>
               paymentLink && navigator.clipboard.writeText(paymentLink)
             }

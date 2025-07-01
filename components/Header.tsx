@@ -9,8 +9,8 @@ import { useCart } from "../lib/cart";
 export default function Header() {
   const { items } = useCart();
   return (
-    <header className="bg-gradient-to-r from-blue-600 to-teal-600 text-white shadow-md py-4">
-      <div className="container mx-auto flex items-center justify-between px-4">
+    <header className="bg-gradient-to-r from-blue-600 to-teal-600 text-white shadow-md py-4 sticky top-0 z-50">
+      <div className="max-w-5xl mx-auto flex items-center justify-between px-4">
         <Link href="/" className="text-2xl font-bold hover:opacity-90">
           Mtumba Online
         </Link>
