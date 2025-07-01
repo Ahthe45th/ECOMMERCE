@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
-import { Order } from '../../types';
+import { useEffect, useState } from "react";
+import { Order } from "../../types";
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
-    fetch('/api/admin/me').then(res => {
+    fetch("/api/admin/me").then((res) => {
       if (res.status === 401) {
-        window.location.href = '/admin/login';
+        window.location.href = "/admin/login";
       } else {
-        fetch('/api/orders').then(r => r.json()).then(setOrders);
+        fetch("/api/orders")
+          .then((r) => r.json())
+          .then(setOrders);
       }
     });
   }, []);
@@ -27,10 +29,13 @@ export default function OrdersPage() {
           </tr>
         </thead>
         <tbody>
-          {orders.map(o => (
+          {orders.map((o) => (
             <tr key={o._id} className="border-t">
               <td className="px-2 py-1">
-                <a href={`/admin/orders/${o._id}`} className="text-blue-600 underline">
+                <a
+                  href={`/admin/orders/${o._id}`}
+                  className="text-blue-600 underline"
+                >
                   {o.customerName}
                 </a>
               </td>

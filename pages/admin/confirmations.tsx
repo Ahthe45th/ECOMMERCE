@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Confirmation } from '../../types';
+import { useEffect, useState } from "react";
+import { Confirmation } from "../../types";
 
 export default function ConfirmationsPage() {
   const [confirmations, setConfirmations] = useState<Confirmation[]>([]);
 
   useEffect(() => {
-    fetch('/api/admin/me').then(res => {
+    fetch("/api/admin/me").then((res) => {
       if (res.status === 401) {
-        window.location.href = '/admin/login';
+        window.location.href = "/admin/login";
       } else {
-        fetch('/api/confirmations')
-          .then(r => r.json())
+        fetch("/api/confirmations")
+          .then((r) => r.json())
           .then(setConfirmations);
       }
     });
@@ -30,7 +30,7 @@ export default function ConfirmationsPage() {
           </tr>
         </thead>
         <tbody>
-          {confirmations.map(c => (
+          {confirmations.map((c) => (
             <tr key={c._id} className="border-t">
               <td className="px-2 py-1">{c.orderId}</td>
               <td className="px-2 py-1">{c.phone}</td>

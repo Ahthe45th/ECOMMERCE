@@ -1,9 +1,9 @@
-import type { AppProps } from 'next/app';
-import '../styles/globals.css';
-import WhatsAppButton from '../components/WhatsAppButton';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { CartProvider } from '../lib/cart';
+import type { AppProps } from "next/app";
+import "../styles/globals.css";
+import WhatsAppButton from "../components/WhatsAppButton";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { CartProvider } from "../lib/cart";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (

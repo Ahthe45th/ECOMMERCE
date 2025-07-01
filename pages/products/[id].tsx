@@ -1,12 +1,15 @@
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
-import ProductCard from '../../components/ProductCard';
-import Spinner from '../../components/Spinner';
-import { ShoppingCartIcon, ArrowRightCircleIcon } from '@heroicons/react/24/outline';
-import { Product } from '../../types';
-import { useCart } from '../../lib/cart';
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import ProductCard from "../../components/ProductCard";
+import Spinner from "../../components/Spinner";
+import {
+  ShoppingCartIcon,
+  ArrowRightCircleIcon,
+} from "@heroicons/react/24/outline";
+import { Product } from "../../types";
+import { useCart } from "../../lib/cart";
 
-const fetcher = (url: string) => fetch(url).then(res => res.json());
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function ProductPage() {
   const router = useRouter();
@@ -15,32 +18,42 @@ export default function ProductPage() {
 
   const { data: product, error } = useSWR<Product>(
     id ? `/api/products/${id}` : null,
-    fetcher
+    fetcher,
   );
-  const { data: products } = useSWR<Product[]>('/api/products', fetcher);
+  const { data: products } = useSWR<Product[]>("/api/products", fetcher);
 
   if (error) return <div>Failed to load</div>;
   if (!product) return <Spinner />;
 
-  const others = products?.filter(p => p._id !== id) || [];
+  const others = products?.filter((p) => p._id !== id) || [];
 
   const checkoutNow = () => {
     addItem(product);
-    router.push('/checkout');
+    router.push("/checkout");
   };
 
   return (
     <div className="p-4 space-y-4">
       <div className="border p-4 space-y-2">
-        <img src={product.imageUrl} alt={product.name} className="w-full h-60 object-cover" />
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+          className="w-full h-60 object-cover"
+        />
         <h2 className="text-xl font-bold">{product.name}</h2>
         <p>{product.description}</p>
         <p className="font-bold">KES {product.price}</p>
         <div className="space-x-2">
-          <button className="bg-green-500 text-white px-3 py-1 inline-flex items-center gap-1" onClick={() => addItem(product)}>
+          <button
+            className="bg-green-500 text-white px-3 py-1 inline-flex items-center gap-1"
+            onClick={() => addItem(product)}
+          >
             <ShoppingCartIcon className="w-5 h-5" /> Add to Cart
           </button>
-          <button className="bg-blue-600 text-white px-3 py-1 inline-flex items-center gap-1" onClick={checkoutNow}>
+          <button
+            className="bg-blue-600 text-white px-3 py-1 inline-flex items-center gap-1"
+            onClick={checkoutNow}
+          >
             <ArrowRightCircleIcon className="w-5 h-5" /> Checkout
           </button>
         </div>
@@ -49,7 +62,7 @@ export default function ProductPage() {
       <div>
         <h3 className="text-lg font-semibold mb-2">Other Products</h3>
         <div className="grid grid-cols-2 gap-4">
-          {others.map(p => (
+          {others.map((p) => (
             <ProductCard key={p._id} product={p} />
           ))}
         </div>

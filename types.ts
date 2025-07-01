@@ -18,7 +18,7 @@ export interface Order {
   email: string;
   address: string;
   items: Product[];
-  paymentOption?: 'ondelivery' | 'paynow';
+  paymentOption?: "ondelivery" | "paynow";
   createdAt?: string;
 }
 
@@ -27,8 +27,8 @@ export interface Confirmation {
   orderId: string;
   phone: string;
   message: string;
-  source?: 'user' | 'mpesa';
-  status?: 'approved' | 'pending';
+  source?: "user" | "mpesa";
+  status?: "approved" | "pending";
   createdAt?: string;
 }
 

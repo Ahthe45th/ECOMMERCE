@@ -1,19 +1,21 @@
-import cron from 'node-cron';
-import { connect } from './db';
-import { Confirmation } from './models';
+import cron from "node-cron";
+import { connect } from "./db";
+import { Confirmation } from "./models";
 
 export function startCron() {
-  cron.schedule('*/5 * * * *', async () => {
+  cron.schedule("*/5 * * * *", async () => {
     await connect();
-    const mpesaMessages = await (Confirmation as any).find({ source: 'mpesa' }).lean();
+    const mpesaMessages = await (Confirmation as any)
+      .find({ source: "mpesa" })
+      .lean();
     for (const msg of mpesaMessages) {
       const pendingUser = await (Confirmation as any).findOne({
-        source: 'user',
+        source: "user",
         message: msg.message,
-        status: 'pending'
+        status: "pending",
       });
       if (pendingUser) {
-        pendingUser.status = 'approved';
+        pendingUser.status = "approved";
         await pendingUser.save();
       }
     }

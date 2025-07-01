@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { ShoppingCartIcon } from '@heroicons/react/24/outline';
-import { Product } from '../types';
-import { useCart } from '../lib/cart';
+import Image from "next/image";
+import Link from "next/link";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { Product } from "../types";
+import { useCart } from "../lib/cart";
 
 interface Props {
   product: Product;

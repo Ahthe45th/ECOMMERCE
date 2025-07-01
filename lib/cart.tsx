@@ -1,5 +1,11 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { Product } from '../types';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
+import { Product } from "../types";
 
 interface CartContextValue {
   items: Product[];
@@ -12,7 +18,7 @@ const CartContext = createContext<CartContextValue | undefined>(undefined);
 
 export function useCart() {
   const ctx = useContext(CartContext);
-  if (!ctx) throw new Error('useCart must be used within CartProvider');
+  if (!ctx) throw new Error("useCart must be used within CartProvider");
   return ctx;
 }
 
@@ -20,12 +26,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<Product[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem('cart');
+    const stored = localStorage.getItem("cart");
     if (stored) setItems(JSON.parse(stored));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(items));
+    localStorage.setItem("cart", JSON.stringify(items));
   }, [items]);
 
   const addItem = (p: Product) => setItems((prev) => [...prev, p]);

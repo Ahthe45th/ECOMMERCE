@@ -1,45 +1,47 @@
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { TrashIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
-import { Product } from '../../types';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { TrashIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
+import { Product } from "../../types";
 
 export default function Admin() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [form, setForm] = useState<Omit<Product, '_id' | 'createdAt'>>({
-    name: '',
-    description: '',
+  const [form, setForm] = useState<Omit<Product, "_id" | "createdAt">>({
+    name: "",
+    description: "",
     price: 0,
-    imageUrl: '',
-    size: '',
-    gender: '',
-    category: '',
-    color: ''
+    imageUrl: "",
+    size: "",
+    gender: "",
+    category: "",
+    color: "",
   });
 
   useEffect(() => {
-    fetch('/api/admin/me').then(res => {
+    fetch("/api/admin/me").then((res) => {
       if (res.status === 401) {
-        window.location.href = '/admin/login';
+        window.location.href = "/admin/login";
       } else {
-        fetch('/api/products').then(r => r.json()).then(setProducts);
+        fetch("/api/products")
+          .then((r) => r.json())
+          .then(setProducts);
       }
     });
   }, []);
 
   const submit = async () => {
-    await fetch('/api/products', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form)
+    await fetch("/api/products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
     });
-    const updated = await fetch('/api/products').then(r => r.json());
+    const updated = await fetch("/api/products").then((r) => r.json());
     setProducts(updated);
   };
 
-  const del = async(id: string | undefined) => {
+  const del = async (id: string | undefined) => {
     if (!id) return;
-    await fetch('/api/products/' + id, { method: 'DELETE' });
-    setProducts(products.filter(p => p._id !== id));
+    await fetch("/api/products/" + id, { method: "DELETE" });
+    setProducts(products.filter((p) => p._id !== id));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +58,10 @@ export default function Admin() {
         <Link href="/admin/confirmations" className="underline text-blue-600">
           View Confirmations
         </Link>
-        <Link href="/admin/utils/submit-mpesa" className="underline text-blue-600">
+        <Link
+          href="/admin/utils/submit-mpesa"
+          className="underline text-blue-600"
+        >
           Add M-Pesa Message
         </Link>
         <Link href="/admin/users" className="underline text-blue-600">
@@ -66,16 +71,60 @@ export default function Admin() {
 
       <div className="bg-white rounded shadow p-4 space-y-4">
         <div className="grid md:grid-cols-2 gap-4">
-          <input className="border rounded p-2 w-full" name="name" placeholder="Name" onChange={handleChange} />
-          <input className="border rounded p-2 w-full" name="description" placeholder="Description" onChange={handleChange} />
-          <input className="border rounded p-2 w-full" name="price" placeholder="Price" type="number" onChange={handleChange} />
-          <input className="border rounded p-2 w-full" name="imageUrl" placeholder="Image URL" onChange={handleChange} />
-          <input className="border rounded p-2 w-full" name="size" placeholder="Size" onChange={handleChange} />
-          <input className="border rounded p-2 w-full" name="gender" placeholder="Gender" onChange={handleChange} />
-          <input className="border rounded p-2 w-full" name="category" placeholder="Category" onChange={handleChange} />
-          <input className="border rounded p-2 w-full" name="color" placeholder="Color" onChange={handleChange} />
+          <input
+            className="border rounded p-2 w-full"
+            name="name"
+            placeholder="Name"
+            onChange={handleChange}
+          />
+          <input
+            className="border rounded p-2 w-full"
+            name="description"
+            placeholder="Description"
+            onChange={handleChange}
+          />
+          <input
+            className="border rounded p-2 w-full"
+            name="price"
+            placeholder="Price"
+            type="number"
+            onChange={handleChange}
+          />
+          <input
+            className="border rounded p-2 w-full"
+            name="imageUrl"
+            placeholder="Image URL"
+            onChange={handleChange}
+          />
+          <input
+            className="border rounded p-2 w-full"
+            name="size"
+            placeholder="Size"
+            onChange={handleChange}
+          />
+          <input
+            className="border rounded p-2 w-full"
+            name="gender"
+            placeholder="Gender"
+            onChange={handleChange}
+          />
+          <input
+            className="border rounded p-2 w-full"
+            name="category"
+            placeholder="Category"
+            onChange={handleChange}
+          />
+          <input
+            className="border rounded p-2 w-full"
+            name="color"
+            placeholder="Color"
+            onChange={handleChange}
+          />
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded inline-flex items-center gap-1" onClick={submit}>
+        <button
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded inline-flex items-center gap-1"
+          onClick={submit}
+        >
           <PlusCircleIcon className="w-5 h-5" /> Add Product
         </button>
       </div>
@@ -88,11 +137,14 @@ export default function Admin() {
           </tr>
         </thead>
         <tbody>
-          {products.map(p => (
+          {products.map((p) => (
             <tr key={p._id} className="border-t">
               <td className="px-4 py-2">{p.name}</td>
               <td className="px-4 py-2 text-right">
-                <button className="text-red-600 hover:underline inline-flex items-center gap-1" onClick={() => del(p._id)}>
+                <button
+                  className="text-red-600 hover:underline inline-flex items-center gap-1"
+                  onClick={() => del(p._id)}
+                >
                   <TrashIcon className="w-5 h-5" /> Delete
                 </button>
               </td>

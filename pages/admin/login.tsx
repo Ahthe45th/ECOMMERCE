@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function AdminLogin() {
   const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const submit = async () => {
-    const res = await fetch('/api/admin/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const res = await fetch("/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
     });
     if (res.ok) {
-      router.push('/admin');
+      router.push("/admin");
     } else {
-      setError('Invalid credentials');
+      setError("Invalid credentials");
     }
   };
 
@@ -36,7 +36,10 @@ export default function AdminLogin() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="bg-blue-600 text-white px-4 py-2 rounded" onClick={submit}>
+      <button
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+        onClick={submit}
+      >
         Login
       </button>
       {error && <p className="text-red-600">{error}</p>}
