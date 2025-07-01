@@ -35,3 +35,11 @@ export const Product = mongoose.models.Product || mongoose.model('Product', Prod
 export const Order = mongoose.models.Order || mongoose.model('Order', OrderSchema);
 export const Confirmation =
   mongoose.models.Confirmation || mongoose.model('Confirmation', ConfirmationSchema);
+
+const AdminUserSchema = new mongoose.Schema({
+  username: { type: String, unique: true },
+  passwordHash: String,
+});
+
+export const AdminUser =
+  mongoose.models.AdminUser || mongoose.model('AdminUser', AdminUserSchema);

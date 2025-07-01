@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function SubmitMpesa() {
   const [message, setMessage] = useState('');
   const [phone, setPhone] = useState('');
   const [orderId, setOrderId] = useState('');
   const [sent, setSent] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/admin/me').then(res => {
+      if (res.status === 401) {
+        window.location.href = '/admin/login';
+      }
+    });
+  }, []);
 
   const submit = async () => {
     await fetch('/api/mpesa', {
