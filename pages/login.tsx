@@ -43,6 +43,13 @@ export default function Login() {
         Login
       </button>
       {error && <p className="text-red-600">{error}</p>}
+      <p className="text-sm">
+        New here?{" "}
+        <a href="/signup" className="text-blue-600 underline">
+          Create an account
+        </a>
+      </p>
+
     </div>
   );
 }
