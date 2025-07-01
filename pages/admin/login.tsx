@@ -21,23 +21,23 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="max-w-sm mx-auto p-4 space-y-2">
+    <div className="max-w-sm mx-auto p-6 space-y-4 bg-white rounded shadow">
       <h1 className="text-xl font-bold">Admin Login</h1>
       <input
-        className="border p-2 w-full"
+        className="border rounded p-2 w-full"
         placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
-        className="border p-2 w-full"
+        className="border rounded p-2 w-full"
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <button
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
         onClick={submit}
       >
         Login
