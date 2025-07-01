@@ -1,25 +1,25 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function PayPage() {
   const router = useRouter();
   const { id } = router.query;
-  const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
 
   const submit = async () => {
     if (!id) return;
-    await fetch('/api/confirmations', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    await fetch("/api/confirmations", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         orderId: id,
         phone,
         message,
-        status: 'pending',
-        source: 'user'
-      })
+        status: "pending",
+        source: "user",
+      }),
     });
     setSent(true);
   };
@@ -31,14 +31,14 @@ export default function PayPage() {
         className="border p-2 w-full"
         placeholder="Phone number used"
         value={phone}
-        onChange={e => setPhone(e.target.value)}
+        onChange={(e) => setPhone(e.target.value)}
       />
       <textarea
         className="border p-2 w-full"
         rows={4}
         placeholder="Paste M-Pesa confirmation message"
         value={message}
-        onChange={e => setMessage(e.target.value)}
+        onChange={(e) => setMessage(e.target.value)}
       />
       <button
         onClick={submit}

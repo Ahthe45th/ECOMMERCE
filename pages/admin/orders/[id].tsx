@@ -1,24 +1,24 @@
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
-import { useEffect } from 'react';
-import { Order, Confirmation } from '../../../types';
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import { useEffect } from "react";
+import { Order, Confirmation } from "../../../types";
 
-const fetcher = (url: string) => fetch(url).then(res => res.json());
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function OrderDetailsPage() {
   const router = useRouter();
   const { id } = router.query;
   useEffect(() => {
-    fetch('/api/admin/me').then(res => {
+    fetch("/api/admin/me").then((res) => {
       if (res.status === 401) {
-        window.location.href = '/admin/login';
+        window.location.href = "/admin/login";
       }
     });
   }, []);
-  const { data, mutate } = useSWR<{ order: Order; confirmation?: Confirmation }>(
-    id ? `/api/orders/${id}` : null,
-    fetcher
-  );
+  const { data, mutate } = useSWR<{
+    order: Order;
+    confirmation?: Confirmation;
+  }>(id ? `/api/orders/${id}` : null, fetcher);
 
   if (!data) return <div className="p-4">Loading...</div>;
 
@@ -26,11 +26,12 @@ export default function OrderDetailsPage() {
 
   const toggleStatus = async () => {
     if (!confirmation) return;
-    const newStatus = confirmation.status === 'pending' ? 'approved' : 'pending';
+    const newStatus =
+      confirmation.status === "pending" ? "approved" : "pending";
     await fetch(`/api/confirmations/${confirmation._id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status: newStatus })
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus }),
     });
     mutate();
   };

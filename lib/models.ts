@@ -1,4 +1,4 @@
-import mongoose from './db';
+import mongoose from "./db";
 
 const ProductSchema = new mongoose.Schema({
   name: String,
@@ -9,7 +9,7 @@ const ProductSchema = new mongoose.Schema({
   gender: String,
   category: String,
   color: String,
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
 
 const OrderSchema = new mongoose.Schema({
@@ -19,22 +19,25 @@ const OrderSchema = new mongoose.Schema({
   address: String,
   items: Array,
   paymentOption: String,
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
 
 const ConfirmationSchema = new mongoose.Schema({
   orderId: mongoose.Schema.Types.ObjectId,
   phone: String,
   message: String,
-  source: { type: String, enum: ['user', 'mpesa'], default: 'user' },
-  status: { type: String, enum: ['approved', 'pending'], default: 'pending' },
-  createdAt: { type: Date, default: Date.now }
+  source: { type: String, enum: ["user", "mpesa"], default: "user" },
+  status: { type: String, enum: ["approved", "pending"], default: "pending" },
+  createdAt: { type: Date, default: Date.now },
 });
 
-export const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);
-export const Order = mongoose.models.Order || mongoose.model('Order', OrderSchema);
+export const Product =
+  mongoose.models.Product || mongoose.model("Product", ProductSchema);
+export const Order =
+  mongoose.models.Order || mongoose.model("Order", OrderSchema);
 export const Confirmation =
-  mongoose.models.Confirmation || mongoose.model('Confirmation', ConfirmationSchema);
+  mongoose.models.Confirmation ||
+  mongoose.model("Confirmation", ConfirmationSchema);
 
 const AdminUserSchema = new mongoose.Schema({
   username: { type: String, unique: true },
@@ -42,4 +45,4 @@ const AdminUserSchema = new mongoose.Schema({
 });
 
 export const AdminUser =
-  mongoose.models.AdminUser || mongoose.model('AdminUser', AdminUserSchema);
+  mongoose.models.AdminUser || mongoose.model("AdminUser", AdminUserSchema);

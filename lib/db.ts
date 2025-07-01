@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const MONGODB_URI =
   process.env.MONGODB_URI ||
-  'mongodb+srv://kaziwavijana:GvQCkSIcufEY1mgH@cluster0.1kkzax7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+  "mongodb+srv://kaziwavijana:GvQCkSIcufEY1mgH@cluster0.1kkzax7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // Use a global cached connection across hot reloads in development.
 let cached = (global as any).mongoose as
