@@ -5,7 +5,13 @@ export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
-    fetch('/api/orders').then(res => res.json()).then(setOrders);
+    fetch('/api/admin/me').then(res => {
+      if (res.status === 401) {
+        window.location.href = '/admin/login';
+      } else {
+        fetch('/api/orders').then(r => r.json()).then(setOrders);
+      }
+    });
   }, []);
 
   return (

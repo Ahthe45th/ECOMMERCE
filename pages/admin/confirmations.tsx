@@ -5,7 +5,15 @@ export default function ConfirmationsPage() {
   const [confirmations, setConfirmations] = useState<Confirmation[]>([]);
 
   useEffect(() => {
-    fetch('/api/confirmations').then(res => res.json()).then(setConfirmations);
+    fetch('/api/admin/me').then(res => {
+      if (res.status === 401) {
+        window.location.href = '/admin/login';
+      } else {
+        fetch('/api/confirmations')
+          .then(r => r.json())
+          .then(setConfirmations);
+      }
+    });
   }, []);
 
   return (

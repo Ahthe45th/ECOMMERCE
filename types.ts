@@ -31,3 +31,9 @@ export interface Confirmation {
   status?: 'approved' | 'pending';
   createdAt?: string;
 }
+
+export interface AdminUser {
+  _id?: string;
+  username: string;
+  passwordHash?: string;
+}

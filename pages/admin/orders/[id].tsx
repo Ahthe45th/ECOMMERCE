@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import { useEffect } from 'react';
 import { Order, Confirmation } from '../../../types';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
@@ -7,6 +8,13 @@ const fetcher = (url: string) => fetch(url).then(res => res.json());
 export default function OrderDetailsPage() {
   const router = useRouter();
   const { id } = router.query;
+  useEffect(() => {
+    fetch('/api/admin/me').then(res => {
+      if (res.status === 401) {
+        window.location.href = '/admin/login';
+      }
+    });
+  }, []);
   const { data, mutate } = useSWR<{ order: Order; confirmation?: Confirmation }>(
     id ? `/api/orders/${id}` : null,
     fetcher

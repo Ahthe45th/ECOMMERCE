@@ -17,7 +17,13 @@ export default function Admin() {
   });
 
   useEffect(() => {
-    fetch('/api/products').then(res => res.json()).then(setProducts);
+    fetch('/api/admin/me').then(res => {
+      if (res.status === 401) {
+        window.location.href = '/admin/login';
+      } else {
+        fetch('/api/products').then(r => r.json()).then(setProducts);
+      }
+    });
   }, []);
 
   const submit = async () => {
@@ -52,6 +58,9 @@ export default function Admin() {
         </Link>
         <Link href="/admin/utils/submit-mpesa" className="underline text-blue-600">
           Add M-Pesa Message
+        </Link>
+        <Link href="/admin/users" className="underline text-blue-600">
+          Manage Users
         </Link>
       </div>
 
