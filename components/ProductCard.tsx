@@ -11,7 +11,7 @@ interface Props {
 export default function ProductCard({ product }: Props) {
   const { addItem } = useCart();
   return (
-    <div className="bg-white border rounded-lg overflow-hidden shadow transition hover:shadow-lg">
+    <div className="bg-white border rounded-lg overflow-hidden shadow transition-transform hover:shadow-xl hover:-translate-y-1">
       <Link
         href={`/products/${product._id}`}
         className="block p-4 space-y-2 text-gray-800"
