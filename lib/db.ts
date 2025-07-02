@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
+// Connection string for MongoDB. An environment variable can override the
+// default local database used in development.
 const MONGODB_URI =
-  process.env.MONGODB_URI ||
-  "mongodb+srv://kaziwavijana:GvQCkSIcufEY1mgH@cluster0.1kkzax7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ecommerce";
 
 // Use a global cached connection across hot reloads in development.
 let cached = (global as any).mongoose as
