@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { useEffect } from "react";
 import { Order, Confirmation } from "../../../types";
+import Spinner from "../../../components/Spinner";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -20,7 +21,12 @@ export default function OrderDetailsPage() {
     confirmation?: Confirmation;
   }>(id ? `/api/orders/${id}` : null, fetcher);
 
-  if (!data) return <div className="p-4">Loading...</div>;
+  if (!data)
+    return (
+      <div className="p-4">
+        <Spinner />
+      </div>
+    );
 
   const { order, confirmation } = data;
 
