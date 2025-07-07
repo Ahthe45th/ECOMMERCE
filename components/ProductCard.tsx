@@ -26,7 +26,7 @@ export default function ProductCard({ product }: Props) {
         <p className="font-bold">KES {product.price}</p>
       </Link>
       <button
-        className="bg-green-500 hover:bg-green-600 text-white w-full py-2 font-semibold flex items-center justify-center gap-1 rounded-b"
+        className="btn-success w-full rounded-none rounded-b"
         onClick={() => addItem(product)}
       >
         <ShoppingCartIcon className="w-5 h-5" /> Add to Cart
