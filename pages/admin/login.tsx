@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Spinner from "../../components/Spinner";
 
 export default function AdminLogin() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const submit = async () => {
+    setLoading(true);
     const res = await fetch("/api/admin/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -18,6 +21,7 @@ export default function AdminLogin() {
     } else {
       setError("Invalid credentials");
     }
+    setLoading(false);
   };
 
   return (
@@ -36,8 +40,12 @@ export default function AdminLogin() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="btn-primary" onClick={submit}>
-        Login
+      <button
+        className="btn-primary flex justify-center"
+        onClick={submit}
+        disabled={loading}
+      >
+        {loading ? <Spinner /> : "Login"}
       </button>
       {error && <p className="text-red-600">{error}</p>}
     </div>
