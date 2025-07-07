@@ -63,25 +63,25 @@ export default function Checkout() {
       ))}
 
       <input
-        className="border rounded p-2 w-full"
+        className="input"
         name="customerName"
         placeholder="Name"
         onChange={handleChange}
       />
       <input
-        className="border rounded p-2 w-full"
+        className="input"
         name="phone"
         placeholder="Phone"
         onChange={handleChange}
       />
       <input
-        className="border rounded p-2 w-full"
+        className="input"
         name="email"
         placeholder="Email"
         onChange={handleChange}
       />
       <input
-        className="border rounded p-2 w-full"
+        className="input"
         name="address"
         placeholder="Address"
         onChange={handleChange}
@@ -109,24 +109,21 @@ export default function Checkout() {
         </label>
       </div>
       <p>M-Pesa instructions will be sent to your phone.</p>
-      <button
-        className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded inline-flex items-center gap-1"
-        onClick={submit}
-      >
+      <button className="btn-success" onClick={submit}>
         Submit <ArrowRightCircleIcon className="w-5 h-5" />
       </button>
       {paymentLink && (
         <div className="mt-2 space-x-2">
           <a
             href={paymentLink}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded inline-block"
+            className="btn-primary inline-block"
             target="_blank"
             rel="noopener noreferrer"
           >
             Go to Payment
           </a>
           <button
-            className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
+            className="btn-secondary"
             onClick={() =>
               paymentLink && navigator.clipboard.writeText(paymentLink)
             }

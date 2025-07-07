@@ -26,28 +26,25 @@ export default function Signup() {
     <div className="max-w-sm mx-auto p-6 space-y-4 bg-white rounded shadow">
       <h1 className="text-xl font-bold">Sign Up</h1>
       <input
-        className="border rounded p-2 w-full"
+        className="input"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        className="border rounded p-2 w-full"
+        className="input"
         placeholder="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <input
-        className="border rounded p-2 w-full"
+        className="input"
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button
-        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
-        onClick={submit}
-      >
+      <button className="btn-success" onClick={submit}>
         Sign Up
       </button>
       {error && <p className="text-red-600">{error}</p>}

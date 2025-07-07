@@ -72,59 +72,56 @@ export default function Admin() {
       <div className="bg-white rounded shadow p-4 space-y-4">
         <div className="grid md:grid-cols-2 gap-4">
           <input
-            className="border rounded p-2 w-full"
+            className="input"
             name="name"
             placeholder="Name"
             onChange={handleChange}
           />
           <input
-            className="border rounded p-2 w-full"
+            className="input"
             name="description"
             placeholder="Description"
             onChange={handleChange}
           />
           <input
-            className="border rounded p-2 w-full"
+            className="input"
             name="price"
             placeholder="Price"
             type="number"
             onChange={handleChange}
           />
           <input
-            className="border rounded p-2 w-full"
+            className="input"
             name="imageUrl"
             placeholder="Image URL"
             onChange={handleChange}
           />
           <input
-            className="border rounded p-2 w-full"
+            className="input"
             name="size"
             placeholder="Size"
             onChange={handleChange}
           />
           <input
-            className="border rounded p-2 w-full"
+            className="input"
             name="gender"
             placeholder="Gender"
             onChange={handleChange}
           />
           <input
-            className="border rounded p-2 w-full"
+            className="input"
             name="category"
             placeholder="Category"
             onChange={handleChange}
           />
           <input
-            className="border rounded p-2 w-full"
+            className="input"
             name="color"
             placeholder="Color"
             onChange={handleChange}
           />
         </div>
-        <button
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded inline-flex items-center gap-1"
-          onClick={submit}
-        >
+        <button className="btn-primary" onClick={submit}>
           <PlusCircleIcon className="w-5 h-5" /> Add Product
         </button>
       </div>

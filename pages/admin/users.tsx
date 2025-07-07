@@ -50,22 +50,19 @@ export default function ManageUsers() {
       <h1 className="text-xl font-bold">Manage Admin Users</h1>
       <div className="space-y-2">
         <input
-          className="border p-2 w-full"
+          className="input"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
-          className="border p-2 w-full"
+          className="input"
           placeholder="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-          onClick={addUser}
-        >
+        <button className="btn-primary" onClick={addUser}>
           Add User
         </button>
       </div>
@@ -74,7 +71,7 @@ export default function ManageUsers() {
           <li key={u.username} className="flex justify-between border p-2">
             {u.username}
             <button
-              className="text-red-600"
+              className="btn-danger px-2 py-1 text-sm"
               onClick={() => removeUser(u.username)}
             >
               Delete
