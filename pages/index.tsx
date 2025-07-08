@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import ProductCard from "../components/ProductCard";
 import Spinner from "../components/Spinner";
+import CategorySlider from "../components/CategorySlider";
 import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
 import { Product } from "../types";
 
@@ -8,6 +9,9 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Home() {
   const { data, error } = useSWR<Product[]>("/api/products", fetcher);
+  const categories = data
+    ? Array.from(new Set(data.map((p) => p.category))).filter(Boolean)
+    : [];
 
   const hero = (
     <section className="relative h-80 sm:h-[30rem] flex items-center justify-center text-white mb-6">
@@ -46,13 +50,19 @@ export default function Home() {
       {!data ? (
         <Spinner />
       ) : (
-        <div
-          id="products"
-          className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-6 p-4"
-        >
-          {data.map((p) => (
-            <ProductCard key={p._id} product={p} />
+        <div id="products" className="space-y-8">
+          {categories.map((cat) => (
+            <CategorySlider
+              key={cat}
+              title={cat}
+              products={data.filter((p) => p.category === cat)}
+            />
           ))}
+          <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-6 p-4">
+            {data.map((p) => (
+              <ProductCard key={p._id} product={p} />
+            ))}
+          </div>
         </div>
       )}
     </div>
