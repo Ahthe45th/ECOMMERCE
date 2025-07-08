@@ -3,6 +3,7 @@ import {
   HomeIcon,
   ShoppingCartIcon,
   Cog6ToothIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useCart } from "../lib/cart";
 
@@ -31,7 +32,7 @@ export default function Header() {
             href="/account/orders"
             className="hover:underline inline-flex items-center gap-1"
           >
-            Account
+            <UserCircleIcon className="w-5 h-5" /> Account
           </Link>
           <Link
             href="/admin"
