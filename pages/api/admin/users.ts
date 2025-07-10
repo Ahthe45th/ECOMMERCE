@@ -20,11 +20,19 @@ export default async function handler(
   } else if (req.method === "POST") {
     const { username, password } = req.body;
     const hash = await bcrypt.hash(password, 10);
-    const user = await (AdminUser as any).create({
-      username,
-      passwordHash: hash,
-    });
-    res.json({ username: user.username });
+    try {
+      const user = await (AdminUser as any).create({
+        username,
+        passwordHash: hash,
+      });
+      res.json({ username: user.username });
+    } catch (err: any) {
+      if (err.code === 11000) {
+        return res.status(400).json({ error: "User already exists" });
+      }
+      console.error(err);
+      res.status(500).json({ error: "Failed to create user" });
+    }
   } else if (req.method === "DELETE") {
     const { username } = req.body;
     await (AdminUser as any).deleteOne({ username });
