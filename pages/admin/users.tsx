@@ -10,6 +10,8 @@ export default function ManageUsers() {
   const [users, setUsers] = useState<User[]>([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const load = async () => {
     const res = await fetch("/api/admin/users");
@@ -26,14 +28,22 @@ export default function ManageUsers() {
   }, []);
 
   const addUser = async () => {
-    await fetch("/api/admin/users", {
+    setError("");
+    setSuccess("");
+    const res = await fetch("/api/admin/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
     });
-    setUsername("");
-    setPassword("");
-    load();
+    if (res.ok) {
+      setSuccess("User added");
+      setUsername("");
+      setPassword("");
+      load();
+    } else {
+      const data = await res.json().catch(() => ({}));
+      setError(data.error || "Failed to add user");
+    }
   };
 
   const removeUser = async (name: string) => {
@@ -65,6 +75,8 @@ export default function ManageUsers() {
         <button className="btn-primary" onClick={addUser}>
           Add User
         </button>
+        {success && <p className="text-green-600">{success}</p>}
+        {error && <p className="text-red-600">{error}</p>}
       </div>
       <ul className="space-y-1">
         {users.map((u) => (
