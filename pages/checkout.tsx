@@ -38,6 +38,22 @@ export default function Checkout() {
     alert("Order received! Use the link below to pay when ready.");
   };
 
+  const orderOnWhatsApp = () => {
+    if (items.length === 0) return;
+    const base = window.location.origin;
+    const details = items
+      .map(
+        (i) =>
+          `${i.name}\nURL: ${base}/products/${i._id}\nPrice: KES ${i.price}`,
+      )
+      .join("\n\n");
+    const msg = `Hello, I want to purchase \n${details}`;
+    const url =
+      "https://api.whatsapp.com/send?phone=254700474550&text=" +
+      encodeURIComponent(msg);
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="max-w-md mx-auto p-4 space-y-3">
       <h2 className="text-lg font-semibold">Cart Items</h2>
@@ -111,6 +127,9 @@ export default function Checkout() {
       <p>M-Pesa instructions will be sent to your phone.</p>
       <button className="btn-success" onClick={submit}>
         Submit <ArrowRightCircleIcon className="w-5 h-5" />
+      </button>
+      <button className="btn-primary" onClick={orderOnWhatsApp}>
+        Order on WhatsApp
       </button>
       {paymentLink && (
         <div className="mt-2 space-x-2">

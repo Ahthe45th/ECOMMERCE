@@ -6,6 +6,7 @@ import {
   ShoppingCartIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
+import { FaWhatsapp } from "react-icons/fa";
 import { Product } from "../../types";
 import { useCart } from "../../lib/cart";
 
@@ -32,6 +33,15 @@ export default function ProductPage() {
     router.push("/checkout");
   };
 
+  const orderOnWhatsApp = () => {
+    const base = window.location.origin;
+    const msg = `Hello, I want to purchase\n${product.name}\nURL: ${base}/products/${product._id}\nPrice: KES ${product.price}`;
+    const url =
+      "https://api.whatsapp.com/send?phone=254700474550&text=" +
+      encodeURIComponent(msg);
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="max-w-3xl mx-auto p-4 space-y-4">
       <div className="bg-white border rounded shadow p-4 space-y-3">
@@ -55,6 +65,12 @@ export default function ProductPage() {
             onClick={checkoutNow}
           >
             <ArrowRightCircleIcon className="w-5 h-5" /> Checkout
+          </button>
+          <button
+            className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded inline-flex items-center gap-1"
+            onClick={orderOnWhatsApp}
+          >
+            <FaWhatsapp className="w-5 h-5" /> Order on WhatsApp
           </button>
         </div>
       </div>
