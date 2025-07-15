@@ -20,6 +20,7 @@ export default function Admin() {
     color: "",
   });
   const [importFile, setImportFile] = useState<File | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   useEffect(() => {
     fetch("/api/admin/me").then((res) => {
@@ -51,6 +52,24 @@ export default function Admin() {
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImportFile(e.target.files?.[0] || null);
+  };
+
+  const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImageFile(file);
+    const res = await fetch(
+      `/api/upload-url?fileName=${encodeURIComponent(file.name)}`,
+    );
+    if (res.ok) {
+      const { uploadUrl, publicUrl } = await res.json();
+      await fetch(uploadUrl, {
+        method: "PUT",
+        headers: { "Content-Type": file.type },
+        body: file,
+      });
+      setForm({ ...form, imageUrl: publicUrl });
+    }
   };
 
   const bulkImport = async () => {
@@ -119,9 +138,16 @@ export default function Admin() {
             onChange={handleChange}
           />
           <input
+            type="file"
+            accept="image/*"
+            onChange={handleImage}
+            className="input"
+          />
+          <input
             className="input"
             name="imageUrl"
             placeholder="Image URL"
+            value={form.imageUrl}
             onChange={handleChange}
           />
           <input
