@@ -16,7 +16,8 @@ npm install
 npm run dev
 ```
 
-Set `MONGODB_URI` in `.env` to connect to MongoDB. If not provided, the app
+Copy `.env.example` to `.env` and update the values for your environment. Set
+`MONGODB_URI` in `.env` to connect to MongoDB. If not provided, the app
 defaults to `mongodb://127.0.0.1:27017/ecommerce`. To enable email
 notifications, also provide `MAILJET_API_KEY`, `MAILJET_SECRET_KEY` and
 `MAILJET_FROM`.
@@ -24,7 +25,8 @@ notifications, also provide `MAILJET_API_KEY`, `MAILJET_SECRET_KEY` and
 To upload product images to Google Cloud Storage, set `GCS_BUCKET_NAME` and
 `GOOGLE_APPLICATION_CREDENTIALS` pointing to a service account JSON file with
 permission to upload objects. The optional `GCP_PROJECT_ID` can also be
-specified if not included in the credentials file.
+specified if not included in the credentials file. An example bucket name is
+`my-form-uploads`, which is provided in `.env.example`.
 
 ## Production
 
