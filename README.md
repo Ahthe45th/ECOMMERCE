@@ -7,6 +7,7 @@ This is a minimal Next.js + MongoDB eCommerce demo for a Kenyan second-hand clot
 - Customers can sign up and log in to view their orders.
 - Orders now have a workflow status (pending, processed, shipped, delivered, cancelled) editable in the admin panel.
 - Admins can bulk import products from a CSV or JSON file.
+- Product images can be uploaded to a Google Cloud Storage bucket.
 
 ## Development
 
@@ -19,6 +20,11 @@ Set `MONGODB_URI` in `.env` to connect to MongoDB. If not provided, the app
 defaults to `mongodb://127.0.0.1:27017/ecommerce`. To enable email
 notifications, also provide `MAILJET_API_KEY`, `MAILJET_SECRET_KEY` and
 `MAILJET_FROM`.
+
+To upload product images to Google Cloud Storage, set `GCS_BUCKET_NAME` and
+`GOOGLE_APPLICATION_CREDENTIALS` pointing to a service account JSON file with
+permission to upload objects. The optional `GCP_PROJECT_ID` can also be
+specified if not included in the credentials file.
 
 ## Production
 
