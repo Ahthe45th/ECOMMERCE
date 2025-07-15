@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { TrashIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
+import {
+  TrashIcon,
+  PlusCircleIcon,
+  ArrowUpTrayIcon,
+} from "@heroicons/react/24/outline";
 import { Product } from "../../types";
 
 export default function Admin() {
@@ -15,6 +19,7 @@ export default function Admin() {
     category: "",
     color: "",
   });
+  const [importFile, setImportFile] = useState<File | null>(null);
 
   useEffect(() => {
     fetch("/api/admin/me").then((res) => {
@@ -42,6 +47,29 @@ export default function Admin() {
     if (!id) return;
     await fetch("/api/products/" + id, { method: "DELETE" });
     setProducts(products.filter((p) => p._id !== id));
+  };
+
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setImportFile(e.target.files?.[0] || null);
+  };
+
+  const bulkImport = async () => {
+    if (!importFile) return;
+    const text = await importFile.text();
+    const headers: Record<string, string> = {};
+    if (importFile.name.endsWith(".json")) {
+      headers["Content-Type"] = "application/json";
+    } else {
+      headers["Content-Type"] = "text/csv";
+    }
+    await fetch("/api/products/bulk", {
+      method: "POST",
+      headers,
+      body: text,
+    });
+    const updated = await fetch("/api/products").then((r) => r.json());
+    setProducts(updated);
+    setImportFile(null);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,6 +152,18 @@ export default function Admin() {
         <button className="btn-primary" onClick={submit}>
           <PlusCircleIcon className="w-5 h-5" /> Add Product
         </button>
+
+        <div className="flex items-center gap-4">
+          <input
+            type="file"
+            accept=".json,.csv"
+            onChange={handleFile}
+            className="input"
+          />
+          <button className="btn-primary" onClick={bulkImport}>
+            <ArrowUpTrayIcon className="w-5 h-5" /> Import Products
+          </button>
+        </div>
       </div>
 
       <table className="min-w-full text-sm border divide-y divide-gray-200">

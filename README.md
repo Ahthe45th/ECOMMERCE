@@ -6,6 +6,7 @@ This is a minimal Next.js + MongoDB eCommerce demo for a Kenyan second-hand clot
 
 - Customers can sign up and log in to view their orders.
 - Orders now have a workflow status (pending, processed, shipped, delivered, cancelled) editable in the admin panel.
+- Admins can bulk import products from a CSV or JSON file.
 
 ## Development
 
@@ -34,4 +35,25 @@ Start the production server with:
 
 ```bash
 npm start
+```
+
+## Bulk Import of Products
+
+Admins can upload a JSON or CSV file containing multiple products.
+Navigate to `/admin` and use the **Import Products** form to select a file.
+The CSV must include a header row with the following fields:
+
+```
+name,description,price,imageUrl,size,gender,category,color
+```
+
+JSON files should contain an array of product objects with the same fields.
+
+Alternatively you can call the API directly:
+
+```bash
+curl -X POST http://localhost:3000/api/products/bulk \
+  -H "Content-Type: application/json" \
+  --cookie "admin-token=YOURTOKEN" \
+  -d '[{"name":"Shirt","description":"Blue","price":10,"imageUrl":"/img.jpg","size":"M","gender":"M","category":"tops","color":"blue"}]'
 ```
