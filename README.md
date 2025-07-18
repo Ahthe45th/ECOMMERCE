@@ -23,10 +23,12 @@ notifications, also provide `MAILJET_API_KEY`, `MAILJET_SECRET_KEY` and
 `MAILJET_FROM`.
 
 To upload product images to Google Cloud Storage, set `GCS_BUCKET_NAME` and
-`GOOGLE_APPLICATION_CREDENTIALS` pointing to a service account JSON file with
-permission to upload objects. The optional `GCP_PROJECT_ID` can also be
-specified if not included in the credentials file. An example bucket name is
-`my-form-uploads`, which is provided in `.env.example`.
+`GOOGLE_APPLICATION_CREDENTIALS`. In a traditional environment this should be
+the path to a service account JSON file. On serverless platforms such as
+Vercel, you can instead store the JSON itself in the environment variable; the
+API route will write it to a temporary file at runtime. The optional
+`GCP_PROJECT_ID` can also be specified if not included in the credentials file.
+An example bucket name is `my-form-uploads`, which is provided in `.env.example`.
 
 ## Production
 
