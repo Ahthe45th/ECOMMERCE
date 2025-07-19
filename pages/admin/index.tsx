@@ -229,6 +229,7 @@ export default function Admin() {
         <thead className="bg-gray-50">
           <tr>
             <th className="px-4 py-2 text-left">Name</th>
+            <th className="px-4 py-2 text-left">Image</th>
             <th className="px-4 py-2"></th>
           </tr>
         </thead>
@@ -236,6 +237,13 @@ export default function Admin() {
           {products.map((p) => (
             <tr key={p._id} className="border-t">
               <td className="px-4 py-2">{p.name}</td>
+              <td className="px-4 py-2">
+                <img
+                  src={p.imageUrl}
+                  alt={p.name}
+                  className="w-16 h-16 object-cover rounded"
+                />
+              </td>
               <td className="px-4 py-2 text-right">
                 <button
                   className="text-red-600 hover:underline inline-flex items-center gap-1"
