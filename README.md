@@ -48,6 +48,20 @@ gsutil cors set gcs-cors.json gs://YOUR_BUCKET_NAME
 
 The `gcs-cors.json` file in this repository contains a reference configuration.
 
+### Troubleshooting signed URL errors
+
+If you encounter a `SignatureDoesNotMatch` error when uploading images:
+
+1. **Verify credentials** – ensure the `GOOGLE_APPLICATION_CREDENTIALS`
+   environment variable points to a valid service account JSON key or contains
+   the JSON itself. A corrupted or truncated key will cause signature
+   verification to fail.
+2. **Check the Content‑Type** – the `Content-Type` header used when uploading
+   must exactly match the `contentType` query parameter passed to the
+   `upload-url` API.
+3. **Confirm server time** – make sure the server's clock is synchronized so the
+   timestamp in the signature is valid.
+
 ## Production
 
 Install dependencies and create an optimized build:
