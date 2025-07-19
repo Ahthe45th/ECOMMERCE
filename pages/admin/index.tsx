@@ -214,6 +214,12 @@ export default function Admin() {
           <PlusCircleIcon className="w-5 h-5" /> Add Product
         </button>
 
+        <p className="text-sm text-gray-600">
+          CSV files must include a header row with
+          <code className="px-1">name,description,price,imageUrl,size,gender,category,color</code>.
+          JSON imports should use the same keys.
+        </p>
+
         <div className="flex items-center gap-4">
           <input
             type="file"
