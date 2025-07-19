@@ -35,7 +35,9 @@ An example bucket name is `my-form-uploads`, which is provided in `.env.example`
 Direct browser uploads require CORS to be enabled on the Google Cloud Storage
 bucket. The `upload-url` API route automatically sets a permissive CORS policy
 each time it is called. Set `GCS_CORS_ORIGINS` to a comma‑separated list to
-restrict the allowed origins (defaults to `*`).
+restrict the allowed origins (defaults to `*`). When requesting an upload URL,
+pass the file's MIME type via a `contentType` query parameter so the generated
+signature matches the upload request.
 
 If you prefer to manage CORS yourself, run the following with the
 [`gsutil`](https://cloud.google.com/storage/docs/gsutil) CLI:

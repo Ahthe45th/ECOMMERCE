@@ -55,6 +55,7 @@ export default async function handler(
   if (!admin) return res.status(401).end();
 
   const fileName = req.query.fileName;
+  const contentTypeParam = req.query.contentType;
   if (!bucketName || typeof fileName !== "string") {
     return res.status(400).json({ error: "Missing bucket or fileName" });
   }
@@ -63,11 +64,16 @@ export default async function handler(
   await ensureBucketCors(bucket);
   const file = bucket.file(fileName);
 
+  const contentType =
+    typeof contentTypeParam === "string" && contentTypeParam.trim() !== ""
+      ? contentTypeParam
+      : "application/octet-stream";
+
   const [url] = await file.getSignedUrl({
     version: "v4",
     action: "write",
     expires: Date.now() + 10 * 60 * 1000,
-    contentType: "application/octet-stream",
+    contentType,
   });
 
   const publicUrl = `https://storage.googleapis.com/${bucketName}/${fileName}`;
