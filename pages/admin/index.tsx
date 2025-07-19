@@ -60,7 +60,9 @@ export default function Admin() {
     if (!file) return;
     setImageFile(file);
     const res = await fetch(
-      `/api/upload-url?fileName=${encodeURIComponent(file.name)}`,
+      `/api/upload-url?fileName=${encodeURIComponent(
+        file.name,
+      )}&contentType=${encodeURIComponent(file.type)}`,
     );
     if (res.ok) {
       const { uploadUrl, publicUrl } = await res.json();
