@@ -30,6 +30,22 @@ API route will write it to a temporary file at runtime. The optional
 `GCP_PROJECT_ID` can also be specified if not included in the credentials file.
 An example bucket name is `my-form-uploads`, which is provided in `.env.example`.
 
+### CORS configuration
+
+Direct browser uploads require CORS to be enabled on the Google Cloud Storage
+bucket. The `upload-url` API route automatically sets a permissive CORS policy
+each time it is called. Set `GCS_CORS_ORIGINS` to a comma‑separated list to
+restrict the allowed origins (defaults to `*`).
+
+If you prefer to manage CORS yourself, run the following with the
+[`gsutil`](https://cloud.google.com/storage/docs/gsutil) CLI:
+
+```bash
+gsutil cors set gcs-cors.json gs://YOUR_BUCKET_NAME
+```
+
+The `gcs-cors.json` file in this repository contains a reference configuration.
+
 ## Production
 
 Install dependencies and create an optimized build:

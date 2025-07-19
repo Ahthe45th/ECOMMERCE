@@ -24,6 +24,29 @@ if (creds && creds.trim().startsWith("{") && creds.includes("private_key")) {
 
 const storage = new Storage();
 
+async function ensureBucketCors(bucket: ReturnType<Storage["bucket"]>) {
+  const origins = process.env.GCS_CORS_ORIGINS
+    ? process.env.GCS_CORS_ORIGINS.split(",").map((o) => o.trim())
+    : ["*"];
+  const desired = [
+    {
+      origin: origins,
+      method: ["PUT", "POST", "GET"],
+      responseHeader: ["Content-Type"],
+      maxAgeSeconds: 3600,
+    },
+  ];
+
+  try {
+    const [metadata] = await bucket.getMetadata();
+    if (JSON.stringify(metadata.cors || []) !== JSON.stringify(desired)) {
+      await bucket.setCorsConfiguration(desired);
+    }
+  } catch (err) {
+    console.error("Failed to ensure bucket CORS", err);
+  }
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -37,6 +60,7 @@ export default async function handler(
   }
 
   const bucket = storage.bucket(bucketName);
+  await ensureBucketCors(bucket);
   const file = bucket.file(fileName);
 
   const [url] = await file.getSignedUrl({
