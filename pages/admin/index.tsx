@@ -21,6 +21,7 @@ export default function Admin() {
   });
   const [importFile, setImportFile] = useState<File | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageSource, setImageSource] = useState<"upload" | "url">("url");
 
   useEffect(() => {
     fetch("/api/admin/me").then((res) => {
@@ -137,19 +138,51 @@ export default function Admin() {
             type="number"
             onChange={handleChange}
           />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImage}
-            className="input"
-          />
-          <input
-            className="input"
-            name="imageUrl"
-            placeholder="Image URL"
-            value={form.imageUrl}
-            onChange={handleChange}
-          />
+          <div className="flex items-center gap-4 col-span-2">
+            <label className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="imageSource"
+                value="url"
+                checked={imageSource === "url"}
+                onChange={() => {
+                  setImageSource("url");
+                  setImageFile(null);
+                }}
+              />
+              URL
+            </label>
+            <label className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="imageSource"
+                value="upload"
+                checked={imageSource === "upload"}
+                onChange={() => {
+                  setImageSource("upload");
+                  setForm({ ...form, imageUrl: "" });
+                }}
+              />
+              Upload
+            </label>
+          </div>
+          {imageSource === "upload" && (
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImage}
+              className="input"
+            />
+          )}
+          {imageSource === "url" && (
+            <input
+              className="input"
+              name="imageUrl"
+              placeholder="Image URL"
+              value={form.imageUrl}
+              onChange={handleChange}
+            />
+          )}
           <input
             className="input"
             name="size"
