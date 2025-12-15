@@ -19,7 +19,7 @@
     "cookie": "^1.0.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.15.2",
-    "next": "^15.3.3",
+    "next": "15.3.8",
     "node-cron": "^4.1.1",
     "node-mailjet": "^6.0.8",
     "react": "^19.1.0",
